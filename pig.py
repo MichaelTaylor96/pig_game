@@ -111,7 +111,7 @@ class Computer:
         self.roll_count = 0
 
     def __str__(self):
-        return f"Computer {self.number}"
+        return f"Computer {self.number} ({self.strategy})"
 
     def take_turn(self):
         print(f"{self} is taking its turn.")
@@ -165,20 +165,21 @@ class Human:
                 print('That was not a valid input')
         return self
 
-number_of_opponents = int(input("How many players do you want to play against? "))
-game = Game(Human(), number_of_opponents)
-game.determine_turn_order()
+if __name__ == "__main__":
+    number_of_opponents = int(input("How many players do you want to play against? "))
+    game = Game(Human(), number_of_opponents)
+    game.determine_turn_order()
 
-while game.running:
-    game.current_player.take_turn()
-    game.display_scores()
-    game.check_win()
-    game.switch_turns()
-    if not game.running:
-        play_again = input("Would you like to play again? (Y / N) ").lower()
-        if play_again == "y":
-            number_of_opponents = int(input("How many players do you want to play against? "))
-            game = Game(Human(), number_of_opponents)
-            game.determine_turn_order()
-        else:
-            print("Bye!")
+    while game.running:
+        game.current_player.take_turn()
+        game.display_scores()
+        game.check_win()
+        game.switch_turns()
+        if not game.running:
+            play_again = input("Would you like to play again? (Y / N) ").lower()
+            if play_again == "y":
+                number_of_opponents = int(input("How many players do you want to play against? "))
+                game = Game(Human(), number_of_opponents)
+                game.determine_turn_order()
+            else:
+                print("Bye!")
